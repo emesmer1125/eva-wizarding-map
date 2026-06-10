@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Eva's Map"><meta name="theme-color" content="#5b2a86"><title>Universal Orlando — Eva's Trip Map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+ body{margin:0;font-family:-apple-system,Arial,sans-serif}
+ #map{height:78vh;width:100%}
+ .bar{background:#5b2a86;color:#fff;padding:10px 16px}
+ .bar h1{margin:0;font-size:18px}
+ .bar p{margin:3px 0 0;font-size:13px;color:#e7d7f3}
+ .legend{padding:10px 16px;font-size:13.5px;line-height:1.6;background:#faf7ff;color:#333}
+ .legend b{color:#5b2a86}
+ .pin{font-weight:700}
+</style></head><body>
+<div class="bar"><h1>🪄 Universal Orlando — Eva's Trip Map</h1>
+<p>Real distances. Tap a pin for what's there + Eva's rides. You're staying at the Four Seasons (Disney side).</p></div>
+<div id="map"></div>
+<div class="legend">
+<b>How far apart:</b> Four Seasons → Universal ≈ <b>20 min drive</b> (~11 mi). &nbsp; USF ↔ Islands of Adventure = <b>5-min walk</b> (side by side, + the Hogwarts Express train between them). &nbsp; Universal → Epic Universe ≈ <b>10–15 min shuttle/drive</b> (separate park, no train).<br>
+⭐ = on Eva's list &nbsp;·&nbsp; 🟢 gentle for Dad's back &nbsp;·&nbsp; 🔴 rough (Forbidden Journey)
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+var pts = [
+ {n:"🏨 Four Seasons Orlando (home base)", c:[28.3897,-81.5565], html:"<b>Your hotel</b> — Explorer Island pool. ~20 min drive to Universal."},
+ {n:"🎬 Universal Studios Florida", c:[28.4754,-81.4685], html:"<b>Diagon Alley</b> is here.<br>⭐🟢 <b>Escape from Gringotts</b> (Eva's #1 — gentle)<br>⭐🟢 <b>Hogwarts Express</b> (train to Hogsmeade)<br>🛍️ Weasleys', Quidditch, Madam Malkin's, Borgin &amp; Burkes, +more"},
+ {n:"🏝️ Islands of Adventure", c:[28.4720,-81.4715], html:"<b>Hogsmeade</b> is here — next door to USF.<br>⭐🔴 <b>Forbidden Journey</b> (the 'arm' ride — Eva rides, Dad may skip)<br>⭐🟢 <b>Hogwarts Always</b> (night castle show)<br>🛍️ Honeydukes, Dervish &amp; Banges, Filch's"},
+ {n:"🌌 Epic Universe", c:[28.4205,-81.4625], html:"<b>Separate park, ~10-15 min south. NO train.</b><br>🪄 <b>Ministry of Magic</b> — a THIRD Wizarding World (Battle at the Ministry) — brand new, Eva may not know it exists!<br>🎮 Super Nintendo World (Mario Kart, Yoshi)<br>🐉 How to Train Your Dragon"},
+ {n:"🌋 Volcano Bay (water park)", c:[28.4625,-81.4735], html:"Water park — covered by your 4-park ticket. (Express Pass NOT valid here.)"}
+];
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
+var group=[];
+pts.forEach(function(p){var m=L.marker(p.c).addTo(map).bindPopup("<b>"+p.n+"</b><br>"+p.html);group.push(p.c);});
+map.fitBounds(group,{padding:[40,40]});
+</script>
+</body></html>
